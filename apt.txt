@@ -1,0 +1,18 @@
+wget
+tree
+mplayer
+jq
+feh
+htop
+keepassx
+medit
+python3-pip
+rcconf
+tilda
+xterm
+moreutils
+
+# shutter was removed from Debian-10
+# chromium doesn't needed if I install chrome-browser anyway
+
+upower  # need for .bashrc

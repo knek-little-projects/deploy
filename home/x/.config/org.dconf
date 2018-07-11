@@ -1,0 +1,73 @@
+[gnome/settings-daemon/plugins/media-keys]
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/']
+
+[gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6]
+binding='<Super>x'
+command='gnome-terminal'
+name='terminal'
+
+[gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2]
+binding='<Super>c'
+command='google-chrome --incognito'
+name='chrome incognito'
+
+[gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5]
+binding='<Super>e'
+command='nautilus'
+name='explorer'
+
+[gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1]
+binding='<Shift><Super>c'
+command='google-chrome'
+name='chrome'
+
+[gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4]
+binding='<Super>f'
+command='firefox --private-window'
+name='firefox incognito'
+
+[gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
+binding='<Super>k'
+command='keepassx'
+name='keepassx'
+
+[gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3]
+binding='<Shift><Super>f'
+command='firefox'
+name='firefox'
+
+[gnome/desktop/interface]
+gtk-im-module='gtk-im-context-simple'
+enable-animations=false
+toolkit-accessibility=false
+
+[gnome/desktop/media-handling]
+automount=true
+
+[gnome/desktop/wm/keybindings]
+maximize=@as []
+switch-windows-backward=['<Shift><Alt>Tab']
+unmaximize=@as []
+move-to-workspace-up=['<Primary><Super>Up']
+switch-to-workspace-1=['<Super>F1']
+switch-applications=@as []
+switch-to-workspace-2=['<Super>F2']
+switch-to-workspace-3=['<Super>F3']
+switch-to-workspace-4=['<Super>F4']
+switch-to-workspace-down=['<Super>Down']
+switch-applications-backward=@as []
+move-to-monitor-down=@as []
+switch-windows=['<Alt>Tab']
+move-to-workspace-down=['<Primary><Super>Down']
+move-to-monitor-up=@as []
+switch-to-workspace-up=['<Super>Up']
+
+[gnome/desktop/sound]
+event-sounds=false
+
+[gnome/desktop/background]
+picture-uri='file:///home/x/img/default.jpg'
+color-shading-type='solid'
+primary-color='#000000'
+picture-options='zoom'
+secondary-color='#000000'

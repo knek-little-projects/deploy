@@ -1,0 +1,156 @@
+#!/bin/bash
+PROMPT_COMMAND='echo -ne "\033]0;$(pwd) | $(whoami)\007"'
+
+alias A='apt-get update && apt-get dist-upgrade'
+alias su='su -l'
+alias l='ls -lashrt --color=auto'
+alias ..='cd ..;l'
+alias less='less -I'
+alias grep='grep --color=auto'
+alias free='free -h'
+alias df='df -h'
+alias rm='rm -i'
+alias mv='mv -i'
+alias cp='cp -i'
+alias mplayer='mplayer -loop 0'
+alias feh='feh -F'
+alias cal='ncal -b -M -y'
+alias x='xdg-open'
+alias X='xterm'
+alias св='cd'
+alias ьм='mv'
+alias д='l'
+alias юю='..'
+alias ll='ls -l --color=auto'
+alias r='stat -c "%a %n"'
+alias ipclear='iptables -t filter -F'
+
+export QUOTING_STYLE=literal
+export HISTFILESIZE=
+export HISTSIZE=
+
+alert() {
+    zenity --info --text="$*"
+}
+
+se() {
+    medit "$@" &
+}
+
+nullify() {
+    if [ ! -z "$1" ] && lsblk "$1"
+    then
+        printf "Are you really sure you want to ERASE $1 (y/N)? "
+        read answer
+        if [[ $answer == y ]]
+        then
+            echo "You asked for this!"
+            time pv /dev/zero | dd bs=512K of="$1"
+        fi
+    fi
+}
+
+ipblock() {
+  for address in $*; do
+    iptables -A OUTPUT -d ${address} -j REJECT
+  done
+}
+
+a() {
+  alert "$(history | tail -n1)"
+}
+
+mkpy() {
+  echo '#!/usr/bin/env python3' > "$1" && \
+  chmod +x "$1" && \
+  l "$1"
+}
+
+-() {
+    cd "$@"; l;
+}
+
+speak() {
+    if [ -z "$1" ]
+    then
+        espeak done
+    else
+        espeak "$@"
+    fi
+}
+
+i() {
+    ts_file=~/tmp/apt-get-update.ts
+    ts_new=$(date +%s)
+    if [ -f ${ts_file} ]
+    then
+        ts_old=$(grep -oE '[0-9]+' ${ts_file})
+    else
+        ts_old=0
+    fi
+    if [ $((ts_new - ts_old)) -gt 3600 ]
+    then
+        apt-get update
+        printf "%d" ${ts_new} > ${ts_file}
+    fi
+    apt-get install -y "$@"
+}
+
+ovpn() {
+    if [ -z $1 ]
+    then
+        cd ~/.ovpn
+    else
+        cd $1
+    fi
+    xterm -e "openvpn --daemon --script-security 2 --config *.ovpn" &
+}
+
+upow() {
+    upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep perc | grep -oE [0-9]+. | sed -r s/100\%//
+}
+
+iter() {
+	while sleep 1
+    do
+		"$@"
+	done
+}
+
+s() {
+    "$@" 2>/dev/null 1>/dev/null &
+}
+
+if [ $(whoami) == root ]
+then
+    PSC="31m"
+    
+    xmount() {
+      mount "$@" -o fmask=117,dmask=007,uid=x
+    }
+else
+    if [ $(whoami) == x ]; then
+        PSC="34m"
+    else 
+        PSC="32m"
+    fi
+    
+    alias I='iceweasel -P default --new-instance'
+    alias C='chromium --incognito'
+    alias tcpdump='echo no root'
+    alias nmap='echo no root'
+fi
+
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;${PSC}\]\A\[\033[00m\]:\[\033[01;${PSC}\]$(upow)\[\033[00m\]:\[\033[01;${PSC}\]\u\[\033[00m\]:\[\033[01;${PSC}\]\w\[\033[00m\]\$ '
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
