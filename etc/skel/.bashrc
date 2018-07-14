@@ -141,11 +141,22 @@ else
     alias nmap='echo no root'
 fi
 
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;${PSC}\]\A\[\033[00m\]:\[\033[01;${PSC}\]$(upow)\[\033[00m\]:\[\033[01;${PSC}\]\u\[\033[00m\]:\[\033[01;${PSC}\]\w\[\033[00m\]\$ '
+psc_branch() {
+    BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
+    if [[ -z "${BRANCH}" ]]
+    then
+        printf "" 
+    elif git diff-index --quiet HEAD --
+    then
+        printf ':\033[07;32m%s\033[00m' "${BRANCH}"
+    else
+        printf ':\033[07;31m%s\033[00m' "${BRANCH}"
+    fi
+}
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;${PSC}\]\A\[\033[00m\]:\[\033[01;${PSC}\]$(upow)\[\033[00m\]:\[\033[01;${PSC}\]\u\[\033[00m\]:\[\033[01;${PSC}\]\w\[\033[00m\]$(psc_branch)\$ '
+
+# enable programmable completion features
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion

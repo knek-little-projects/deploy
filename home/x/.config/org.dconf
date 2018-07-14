@@ -1,40 +1,45 @@
 [gnome/settings-daemon/plugins/media-keys]
-custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/']
-
-[gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6]
-binding='<Super>x'
-command='gnome-terminal'
-name='terminal'
-
-[gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2]
-binding='<Super>c'
-command='google-chrome --incognito'
-name='chrome incognito'
-
-[gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5]
-binding='<Super>e'
-command='nautilus'
-name='explorer'
-
-[gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1]
-binding='<Shift><Super>c'
-command='google-chrome'
-name='chrome'
-
-[gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4]
-binding='<Super>f'
-command='firefox --private-window'
-name='firefox incognito'
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/']
 
 [gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
 binding='<Super>k'
 command='keepassx'
 name='keepassx'
 
+[gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1]
+binding='<Shift><Super>c'
+command='google-chrome'
+name='chrome'
+
+[gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2]
+binding='<Super>c'
+command='google-chrome --incognito'
+name='chrome incognito'
+
 [gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3]
 binding='<Shift><Super>f'
 command='firefox'
 name='firefox'
+
+[gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4]
+binding='<Super>f'
+command='firefox --private-window'
+name='firefox incognito'
+
+[gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5]
+binding='<Super>e'
+command='nautilus'
+name='explorer'
+
+[gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6]
+binding='<Super>x'
+command='gnome-terminal'
+name='terminal'
+
+[gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7]
+binding='<Alt><Super>v'
+command="xterm -e 'su -c \"cd ~/.ovpn/; openvpn --config client.ovpn\"'"
+name='ovpn'
 
 [gnome/desktop/interface]
 gtk-im-module='gtk-im-context-simple'
