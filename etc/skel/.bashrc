@@ -150,7 +150,7 @@ psc_branch() {
     then
         printf ':\033[07;32m%s\033[00m' "${BRANCH}"
     else
-        printf ':\033[07;31m%s\033[00m' "${BRANCH}"
+        printf ':\033[07;31m%s (%s)\033[00m' "${BRANCH}" $(git config user.email)
     fi
 }
 

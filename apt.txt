@@ -11,6 +11,7 @@ rcconf
 tilda
 xterm
 moreutils
+pv
 
 # shutter was removed from Debian-10
 # chromium doesn't needed if I install chrome-browser anyway
