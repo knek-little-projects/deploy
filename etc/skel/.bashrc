@@ -146,7 +146,7 @@ psc_branch() {
     if [[ -z "${BRANCH}" ]]
     then
         printf "" 
-    elif git diff-index --quiet HEAD --
+    elif git diff-index --quiet HEAD -- 2>/dev/null
     then
         printf ':\033[07;32m%s\033[00m' "${BRANCH}"
     else

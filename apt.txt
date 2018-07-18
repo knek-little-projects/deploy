@@ -12,6 +12,7 @@ tilda
 xterm
 moreutils
 pv
+ncat
 
 # shutter was removed from Debian-10
 # chromium doesn't needed if I install chrome-browser anyway
