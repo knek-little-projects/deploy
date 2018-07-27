@@ -165,3 +165,5 @@ if ! shopt -oq posix; then
   fi
 fi
 
+export LESS='-R'
+export LESSOPEN='|pygmentize -f 256 %s'
