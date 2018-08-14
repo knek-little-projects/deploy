@@ -103,7 +103,7 @@ ovpn() {
     else
         cd $1
     fi
-    xterm -e "openvpn --daemon --script-security 2 --config *.ovpn" &
+    xterm -e "openvpn --daemon --script-security 2 --config *.ovpn;" &
 }
 
 upow() {
@@ -166,4 +166,4 @@ if ! shopt -oq posix; then
 fi
 
 export LESS='-R'
-export LESSOPEN='|pygmentize -f 256 %s'
+export LESSOPEN='|pygmentize %s'

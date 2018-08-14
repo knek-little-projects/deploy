@@ -40,8 +40,7 @@ chown -R x:x /home/x/.config
 echo "Setup gnome"
 apt remove gnome-shell-extension-dashtodock
 
-cd /root/
-rm -rf Desktop
+rm -rf /root/Desktop
 
 cd /home/x
 su x -c bash << END
@@ -53,6 +52,10 @@ dconf load /org/ < .config/org.dconf
 rm -f .config/org.dconf
 END
 cd -
+
+
+echo "Install docker"
+./docker-install.sh
 
 
 echo "Reboot system to update gnome settings"
