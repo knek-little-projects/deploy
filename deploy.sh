@@ -22,7 +22,14 @@ chmod 700 /root
 
 
 echo "Rewrite .bashrc"
-if [[ $(stat --format %i /etc/skel/.bashrc) != $(stat --format %i ./etc/skel/.bashrc) ]]
+
+inodecompare() {
+  [ -f "$1" ]
+  [ -f "$2" ]
+  [[ $(stat --format %i "$1") == $(stat --format %i "$2") ]]
+}
+
+if ! inodecompare /etc/skel/.bashrc ./etc/skel/.bashrc
 then
     rm -f /etc/skel/.bashrc
     ln -f ./etc/skel/.bashrc /etc/skel/.bashrc
@@ -31,6 +38,8 @@ ln -sf /etc/skel/.bashrc /root/.bashrc
 ln -sf /etc/skel/.bashrc /home/x/.bashrc
 ln -sf /etc/skel/.bashrc /home/test/.bashrc
 
+echo "Fill /etc/"
+inodecompare /etc/nanorc ./etc/nanorc || ln -f ./etc/nanorc /etc/nanorc
 
 echo "Deploy configs"
 cp -ri ./home/x/.config /home/x/

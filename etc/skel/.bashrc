@@ -45,7 +45,7 @@ nullify() {
         if [[ $answer == y ]]
         then
             echo "You asked for this!"
-            time pv /dev/zero | dd bs=512K of="$1"
+            time dd status=progress of=/dev/zero of="$1"
         fi
     fi
 }
@@ -111,10 +111,10 @@ upow() {
 }
 
 iter() {
-	while sleep 1
+    while sleep 1
     do
-		"$@"
-	done
+        "$@"
+    done
 }
 
 s() {
@@ -167,3 +167,13 @@ fi
 
 export LESS='-R'
 export LESSOPEN='|pygmentize %s'
+
+dump() {
+    local t="$HOME/dump/$(date +%s)"
+    mkdir -p "$t"
+    if [[ $# == 0 ]]; then
+        cd "$t"
+    else
+        mv "$@" "$t"
+    fi
+}
