@@ -41,6 +41,10 @@ ln -sf /etc/skel/.bashrc /home/test/.bashrc
 echo "Fill /etc/"
 inodecompare /etc/nanorc ./etc/nanorc || ln -f ./etc/nanorc /etc/nanorc
 
+echo "Deploy /usr"
+ln ./usr/bin/alert /usr/bin/
+ln ./usr/share/nano/nmap.nanorc /usr/share/nano/
+
 echo "Deploy configs"
 cp -ri ./home/x/.config /home/x/
 chown -R x:x /home/x/.config

@@ -1,0 +1,55 @@
+syntax nmap "\.nmap$"
+# header "^(#\*Nmap.*scan initiated.*|(#\s+)?Nmap scan (report )?for.*)$"
+header "^# Nmap.*scan initiated.*$"
+comment "#"
+
+# Strings
+# color brightyellow ""(\.|[^"])*"" "'(\.|[^'])*'"
+
+# other
+color white "^\w.*$"
+
+# open,closed,filtered
+color brightgreen,black "^[0-9]+/(tcp|udp)\s+(closed|filtered|open).*$"
+
+# unknown service
+color brightyellow,black "^[0-9]+/(tcp|udp)\s+(closed|filtered|open)\s+\w+\?$"
+
+# scripts
+color white "^\|.*$"
+
+# scripts.title
+color blue "^\|(( |_)[^ \:]+:( |$))?"
+
+# other.title
+color blue "^\w[^:]+:"
+
+# vulnerability
+icolor brightred "\b(likely )?vulnerable|vulnerability\b"
+
+# CVE
+icolor brightwhite "\bcve\-[0-9]+\-[0-9]+"
+
+# IP
+# color brightwhite "[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+"
+
+# title
+color brightwhite,blue "^.*Nmap scan report for .*$"
+
+# IP Header
+color brightwhite,green "Nmap scan report for \b[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\b"
+
+# title
+color brightwhite,green "^.*Nmap scan report for "
+
+# Potentially intresting
+icolor yellow "(Potentially )?interesting|unexpected"
+
+# Couldnt find any
+icolor black "^.*(Couldn't find any|Host appears to be clean|Not shown: ).*$"
+
+# Hide 
+icolor black "^.*Host is up \([0-9]+.[0-9]+s latency\).|PORT\s+STATE\s+SERVICE\s+VERSION.*$"
+
+# URLs
+# icolor brightwhite "https?:\/\/[^ ]+"

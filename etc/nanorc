@@ -43,7 +43,7 @@ set autoindent
 # set brackets ""')>]}"
 
 ## Do case-sensitive searches by default.
-set casesensitive
+unset casesensitive
 
 ## Constantly display the cursor position in the status bar.  Note that
 ## this overrides "quickblank".

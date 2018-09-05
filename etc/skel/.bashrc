@@ -1,4 +1,10 @@
 #!/bin/bash
+export DISPLAY=:1
+export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1001/bus
+export XDG_RUNTIME_DIR=/run/user/1001
+export XAUTHORITY=/run/user/1001/gdm/Xauthority
+export PATH=$PATH:$HOME/.local/bin
+
 PROMPT_COMMAND='echo -ne "\033]0;$(pwd) | $(whoami)\007"'
 
 alias A='apt-get update && apt-get dist-upgrade'
@@ -28,10 +34,6 @@ alias ipclear='iptables -t filter -F'
 export QUOTING_STYLE=literal
 export HISTFILESIZE=
 export HISTSIZE=
-
-alert() {
-    zenity --info --text="$*"
-}
 
 se() {
     medit "$@" &
@@ -175,5 +177,15 @@ dump() {
         cd "$t"
     else
         mv "$@" "$t"
+    fi
+}
+
+copydump() {
+    local t="$HOME/dump/$(date +%s)"
+    mkdir -p "$t"
+    if [[ $# == 0 ]]; then
+        cd "$t"
+    else
+        cp -r "$@" "$t"
     fi
 }
