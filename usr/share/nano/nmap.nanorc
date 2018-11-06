@@ -48,7 +48,7 @@ icolor yellow "(Potentially )?interesting|unexpected"
 # Couldnt find any
 icolor black "^.*(Couldn't find any|Host appears to be clean|Not shown: ).*$"
 
-# Hide 
+# Hide
 icolor black "^.*Host is up \([0-9]+.[0-9]+s latency\).|PORT\s+STATE\s+SERVICE\s+VERSION.*$"
 
 # URLs

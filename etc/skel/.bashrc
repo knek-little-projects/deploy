@@ -7,12 +7,13 @@ export PATH=$PATH:$HOME/.local/bin
 
 PROMPT_COMMAND='echo -ne "\033]0;$(pwd) | $(whoami)\007"'
 
+alias soundcontrol=pavucontrol
 alias A='apt-get update && apt-get dist-upgrade'
 alias su='su -l'
-alias l='ls -lashrt --color=auto'
+alias l='ls -lashrt --color=always'
 alias ..='cd ..;l'
 alias less='less -I'
-alias grep='grep --color=auto'
+alias grep='grep --color=always'
 alias free='free -h'
 alias df='df -h'
 alias rm='rm -i'
@@ -27,9 +28,15 @@ alias св='cd'
 alias ьм='mv'
 alias д='l'
 alias юю='..'
-alias ll='ls -l --color=auto'
+alias ll='ls -l --color=always'
 alias r='stat -c "%a %n"'
-alias ipclear='iptables -t filter -F'
+
+
+ipclear() {
+  for table in filter nat mangle; do
+    iptables -t $table -F
+  done
+}
 
 export QUOTING_STYLE=literal
 export HISTFILESIZE=
@@ -50,6 +57,16 @@ nullify() {
             time dd status=progress of=/dev/zero of="$1"
         fi
     fi
+}
+
+httpredirect() {
+  length=$(($#-1))
+  array=${@:1:$length}
+  dest=${@: -1}
+  for address in $array; do
+    iptables -t nat -A OUTPUT -p tcp -d $address --dport 80 -j DNAT --to-destination $dest
+    iptables -t nat -A OUTPUT -p tcp -d $address --dport 443 -j DNAT --to-destination $dest
+  done
 }
 
 ipblock() {
