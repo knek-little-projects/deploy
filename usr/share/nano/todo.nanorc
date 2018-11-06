@@ -1,8 +1,9 @@
 syntax nmap "\.todo$"
 
-color white "^\w.*$"
+color white "."
 color white "^\s*\-.*$"
 color green "^\s*\+.*$"
 color red "^\s*(\!.*)$"
+color blue "^\s*(\*.*)$"
 color white "^\s+"
 color brightblack "\[.*?\]"
