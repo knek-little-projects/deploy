@@ -8,6 +8,7 @@ export PATH=$PATH:$HOME/.local/bin
 PROMPT_COMMAND='echo -ne "\033]0;$(pwd) | $(whoami)\007"'
 
 alias soundcontrol=pavucontrol
+alias clip='xclip -sel clipip'
 alias A='apt-get update && apt-get dist-upgrade'
 alias su='su -l'
 alias l='ls -lashrt --color=auto'
@@ -89,10 +90,10 @@ mkpy() {
     cd "$@"; l;
 }
 
-speak() {
+e() {
     if [ -z "$1" ]
     then
-        espeak done
+        espeak "operation is finished: $(history | tail -n1)"
     else
         espeak "$@"
     fi

@@ -153,7 +153,7 @@ set regexp
 set smooth
 
 ## Enable soft line wrapping (AKA full-line display).
-# set softwrap
+set softwrap
 
 ## Use this spelling checker instead of the internal one.  This option
 ## does not have a default value.

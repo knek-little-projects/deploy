@@ -17,7 +17,7 @@ passwd --status x || (useradd --create-home --shell /bin/bash x; passwd x)
 
 
 echo "Security hardening"
-chmod 700 /root
+chmod 700 /root /home/x /home/test
 [ -f /tmp/rcconf.hardened ] || (rcconf; touch /tmp/rcconf.hardened)
 
 
