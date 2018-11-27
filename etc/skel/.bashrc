@@ -93,7 +93,8 @@ mkpy() {
 e() {
     if [ -z "$1" ]
     then
-        espeak "operation is finished: $(history | tail -n1)"
+        op=$(history | tail -n2 | head -n1 | sed -r 's/\s+/ /g' | cut -f3 -d' ')
+        espeak "operation is finished: $op"
     else
         espeak "$@"
     fi
