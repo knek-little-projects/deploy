@@ -1,0 +1,6 @@
+syntax yaml "\.yaml$"
+
+color white "."
+color white "^\s*('|\w)+\: .*$"
+color yellow "^\s*('|\w)+\:"
+color green "#.*$"
