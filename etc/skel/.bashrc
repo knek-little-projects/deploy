@@ -77,7 +77,13 @@ ipblock() {
 }
 
 a() {
-  alert "$(history | tail -n1)"
+  if [[ $? == 0 ]]
+  then
+    status=OK
+  else
+    status=FAIL
+  fi
+  alert "$status $(history | tail -n2 | head -n1)"
 }
 
 mkpy() {
