@@ -31,6 +31,12 @@ alias д='l'
 alias юю='..'
 alias ll='ls -l --color=auto'
 alias r='stat -c "%a %n"'
+alias g='git add .; git commit -m-; git push'
+
+if [ "$(whoami)" == root ]
+then
+  alias o="openvpn --config"
+fi
 
 
 ipclear() {
@@ -77,7 +83,8 @@ ipblock() {
 }
 
 a() {
-  if [[ $? == 0 ]]
+  last_code=$?
+  if [[ $last_code == 0 ]]
   then
     status=OK
   else
@@ -97,12 +104,19 @@ mkpy() {
 }
 
 e() {
+    last_code=$?
     if [ -z "$1" ]
     then
-        op=$(history | tail -n2 | head -n1 | sed -r 's/\s+/ /g' | cut -f3 -d' ')
-        espeak "operation is finished: $op"
+      if [[ $last_code == 0 ]]
+      then
+        status=DONE
+      else
+        status=FAILED
+      fi
+      op=$(history | tail -n2 | head -n1 | sed -r 's/\s+/ /g' | cut -f3 -d' ')
+      espeak "$op is $status"
     else
-        espeak "$@"
+      espeak "$@"
     fi
 }
 
