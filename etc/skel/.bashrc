@@ -1,12 +1,13 @@
 #!/bin/bash
-export DISPLAY=:1
-export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1001/bus
-export XDG_RUNTIME_DIR=/run/user/1001
-export XAUTHORITY=/run/user/1001/gdm/Xauthority
-export PATH=$PATH:$HOME/.local/bin
+export DISPLAY=:0
+export DBUS_SESSION_BUS_ADDRESS=unix:path=~
+export XDG_RUNTIME_DIR=~
+export XAUTHORITY=~/.Xauthority
+export PATH=$PATH:$HOME/.local/bin:$HOME/.node_modules_global/bin
 
 PROMPT_COMMAND='echo -ne "\033]0;$(pwd) | $(whoami)\007"'
 
+alias p='python3'
 alias soundcontrol=pavucontrol
 alias clip='xclip -sel clipip'
 alias A='apt-get update && apt-get dist-upgrade'
@@ -114,9 +115,9 @@ e() {
         status=FAILED
       fi
       op=$(history | tail -n2 | head -n1 | sed -r 's/\s+/ /g' | cut -f3 -d' ')
-      espeak "$op is $status"
+      espeak "$op is $status" 2>/dev/null
     else
-      espeak "$@"
+      espeak "$@" 2>/dev/null
     fi
 }
 
@@ -165,19 +166,20 @@ s() {
 if [ $(whoami) == root ]
 then
     PSC="31m"
-    
+
     xmount() {
       mount "$@" -o fmask=117,dmask=007,uid=x
     }
 else
     if [ $(whoami) == x ]; then
         PSC="34m"
-    else 
+    else
         PSC="32m"
     fi
-    
+
     alias I='iceweasel -P default --new-instance'
     alias C='chromium --incognito'
+    alias C='google-chrome --incognito'
     alias tcpdump='echo no root'
     alias nmap='echo no root'
 fi
