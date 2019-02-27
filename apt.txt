@@ -1,3 +1,9 @@
+strace
+openvpn
+git
+network-manager  
+net-tools  # ifconfig
+sudo
 wget
 tree
 mplayer
@@ -12,9 +18,11 @@ tilda
 xterm
 moreutils
 pv
-ncat
+netcat  # sometimes ncat
 libreoffice
 vlc
+openbox
+xinit 
 
 # shutter was removed from Debian-10
 # chromium doesn't needed if I install chrome-browser anyway
