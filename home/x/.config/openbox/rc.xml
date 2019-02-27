@@ -305,7 +305,7 @@
   </keybind>
 
   <!-- Keybindings for running applications -->  
-  <keybind key="W-y">
+  <keybind key="W-l">
     <action name="Execute">
       <startupnotify>
         <enabled>true</enabled>
@@ -323,15 +323,24 @@
       <command>pycharm</command>
     </action>
   </keybind>  
+  <keybind key="W-S-F1">
+    <action name="Execute">
+      <startupnotify>
+        <enabled>true</enabled>
+        <name>Tilda</name>
+      </startupnotify>
+      <command>bash -c "pgrep tilda || tilda"</command>
+    </action>
+  </keybind>
   <keybind key="W-e">
     <action name="Execute">
       <startupnotify>
         <enabled>true</enabled>
-        <name>Konqueror</name>
+        <name>Explorer</name>
       </startupnotify>
-      <command>kfmclient openProfile filemanagement</command>
+      <command>nautilus</command>
     </action>
-  </keybind>  
+  </keybind>
   <keybind key="W-S-f">
     <action name="Execute">
       <startupnotify>
@@ -339,6 +348,15 @@
         <name>Firefox</name>
       </startupnotify>
       <command>firefox</command>
+    </action>
+  </keybind>
+  <keybind key="W-k">
+    <action name="Execute">
+      <startupnotify>
+        <enabled>true</enabled>
+        <name>KeePassX</name>
+      </startupnotify>
+      <command>keepassx</command>
     </action>
   </keybind>
   <keybind key="W-f">
