@@ -1,6 +1,6 @@
 #!/bin/bash
-export DISPLAY=:0
-export DBUS_SESSION_BUS_ADDRESS=unix:path=~
+# export DISPLAY=:0
+# export DBUS_SESSION_BUS_ADDRESS=unix:path=~
 export XDG_RUNTIME_DIR=~
 export XAUTHORITY=~/.Xauthority
 export PATH=$PATH:$HOME/.local/bin:$HOME/.node_modules_global/bin

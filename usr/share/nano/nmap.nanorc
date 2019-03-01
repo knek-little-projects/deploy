@@ -1,4 +1,4 @@
-syntax nmap "\.nmap$"
+syntax "nmap" "\.nmap$"
 # header "^(#\*Nmap.*scan initiated.*|(#\s+)?Nmap scan (report )?for.*)$"
 header "^# Nmap.*scan initiated.*$"
 comment "#"

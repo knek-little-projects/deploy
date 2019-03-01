@@ -42,13 +42,18 @@ echo "Fill /etc/"
 inodecompare /etc/nanorc ./etc/nanorc || ln -f ./etc/nanorc /etc/nanorc
 
 echo "Deploy /usr"
-ln -sf ./usr/bin/alert /usr/bin/
-ln -sf ./usr/share/nano/nmap.nanorc /usr/share/nano/
+ln -sf $PWD/usr/bin/alert /usr/bin/
+ln -sf $PWD/usr/share/nano/nmap.nanorc /usr/share/nano/
 
 echo "Deploy configs"
 cp -rf ./home/x/.config /home/x/
 chown -R x:x /home/x/.config
 
+cd ./home/x/.config/openbox
+for f in $(ls -1); do
+    ln -f $PWD/$f /home/x/.config/openbox
+done
+cd -
 
 echo "Setup gnome"
 apt remove gnome-shell-extension-dashtodock
