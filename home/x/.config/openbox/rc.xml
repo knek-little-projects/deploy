@@ -350,6 +350,15 @@
       <command>firefox</command>
     </action>
   </keybind>
+  <keybind key="W-x">
+    <action name="Execute">
+      <startupnotify>
+        <enabled>true</enabled>
+        <name>Terminal</name>
+      </startupnotify>
+      <command>xterm</command>
+    </action>
+  </keybind>
   <keybind key="W-k">
     <action name="Execute">
       <startupnotify>
