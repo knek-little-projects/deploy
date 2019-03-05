@@ -9,7 +9,6 @@ net-tools  # ifconfig
 sudo
 wget
 tree
-mplayer
 jq
 feh
 htop
@@ -22,8 +21,6 @@ xterm
 moreutils
 pv
 netcat  # sometimes ncat
-libreoffice
-vlc
 openbox
 xinit 
 
