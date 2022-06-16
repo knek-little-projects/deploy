@@ -12,7 +12,6 @@ jq
 feh
 htop
 keepassx
-medit
 python3-pip
 rcconf
 tilda
@@ -20,8 +19,9 @@ xterm
 moreutils
 pv
 
-# sometimes ncat
-netcat  
+netcat  # sometimes ncat
+
+medit  # not found
 
 openbox
 xorg
