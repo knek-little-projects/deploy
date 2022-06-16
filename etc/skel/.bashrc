@@ -8,7 +8,7 @@ export QUOTING_STYLE=literal
 export HISTFILESIZE=
 export HISTSIZE=
 
-PROMPT_COMMAND='echo -ne "\033]0;$(pwd) | $(whoami)\007"'
+# PROMPT_COMMAND='echo -ne "\033]0;$(pwd) | $(whoami)\007"'
 
 alias soundcontrol=pavucontrol
 alias clip='xclip -sel clipip'
