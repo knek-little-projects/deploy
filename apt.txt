@@ -1,11 +1,10 @@
-nautilus
-espeak
 slock
-strace
-openvpn
 git
 network-manager  
-net-tools  # ifconfig
+
+# ifconfig
+net-tools  
+
 sudo
 wget
 tree
@@ -20,11 +19,16 @@ tilda
 xterm
 moreutils
 pv
-netcat  # sometimes ncat
+
+# sometimes ncat
+netcat  
+
 openbox
-xinit 
+xorg
+xinit
+
+# need for .bashrc PS
+upower  
 
 # shutter was removed from Debian-10
 # chromium doesn't needed if I install chrome-browser anyway
-
-upower  # need for .bashrc
