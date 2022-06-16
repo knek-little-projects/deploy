@@ -1,17 +1,17 @@
 #!/bin/bash
 # export DISPLAY=:0
 # export DBUS_SESSION_BUS_ADDRESS=unix:path=~
-export XDG_RUNTIME_DIR=~
-export XAUTHORITY=~/.Xauthority
+# export XDG_RUNTIME_DIR=~
+# export XAUTHORITY=~/.Xauthority
 export PATH=$PATH:$HOME/.local/bin:$HOME/.node_modules_global/bin
+export QUOTING_STYLE=literal
+export HISTFILESIZE=
+export HISTSIZE=
 
 PROMPT_COMMAND='echo -ne "\033]0;$(pwd) | $(whoami)\007"'
 
-alias p='python3'
 alias soundcontrol=pavucontrol
 alias clip='xclip -sel clipip'
-alias A='apt-get update && apt-get dist-upgrade'
-alias su='su -l'
 alias l='ls -lashrt --color=auto'
 alias ..='cd ..;l'
 alias less='less -I'
@@ -21,7 +21,6 @@ alias df='df -h'
 alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
-alias mplayer='mplayer -loop 0'
 alias feh='feh -F'
 alias cal='ncal -b -M -y'
 alias x='xdg-open'
@@ -30,133 +29,21 @@ alias св='cd'
 alias ьм='mv'
 alias д='l'
 alias юю='..'
-alias ll='ls -l --color=auto'
-alias r='stat -c "%a %n"'
-alias g='git add .; git commit -m-; git push'
+alias p='git push'
 
-if [ "$(whoami)" == root ]
-then
-  alias o="openvpn --config"
-fi
-
-
-ipclear() {
-  for table in filter nat mangle; do
-    iptables -t $table -F
-  done
-}
-
-export QUOTING_STYLE=literal
-export HISTFILESIZE=
-export HISTSIZE=
-
-se() {
-    medit "$@" &
-}
-
-nullify() {
-    if [ ! -z "$1" ] && lsblk "$1"
-    then
-        printf "Are you really sure you want to ERASE $1 (y/N)? "
-        read answer
-        if [[ $answer == y ]]
-        then
-            echo "You asked for this!"
-            time dd status=progress of=/dev/zero of="$1"
-        fi
-    fi
-}
-
-httpredirect() {
-  length=$(($#-1))
-  array=${@:1:$length}
-  dest=${@: -1}
-  for address in $array; do
-    iptables -t nat -A OUTPUT -p tcp -d $address --dport 80 -j DNAT --to-destination $dest
-    iptables -t nat -A OUTPUT -p tcp -d $address --dport 443 -j DNAT --to-destination $dest
-  done
-}
-
-ipblock() {
-  for address in $*; do
-    iptables -A OUTPUT -d ${address} -j REJECT
-  done
-}
-
-a() {
-  last_code=$?
-  if [[ $last_code == 0 ]]
-  then
-    status=OK
+c() {
+  set -x -e
+  git add .
+  if [ $# -eq 0 ]; then
+    git commit -m-
   else
-    status=FAIL
+    git commit -m "$*"
   fi
-  alert "$status $(history | tail -n2 | head -n1)"
-}
-
-mkpy() {
-  echo '#!/usr/bin/env python3' > "$1" && \
-  chmod +x "$1" && \
-  l "$1"
+  set +x +e
 }
 
 -() {
     cd "$@"; l;
-}
-
-e() {
-    last_code=$?
-    if [ -z "$1" ]
-    then
-      if [[ $last_code == 0 ]]
-      then
-        status=DONE
-      else
-        status=FAILED
-      fi
-      op=$(history | tail -n2 | head -n1 | sed -r 's/\s+/ /g' | cut -f3 -d' ')
-      espeak "$op is $status" 2>/dev/null
-    else
-      espeak "$@" 2>/dev/null
-    fi
-}
-
-i() {
-    ts_file=~/tmp/apt-get-update.ts
-    ts_new=$(date +%s)
-    if [ -f ${ts_file} ]
-    then
-        ts_old=$(grep -oE '[0-9]+' ${ts_file})
-    else
-        ts_old=0
-    fi
-    if [ $((ts_new - ts_old)) -gt 3600 ]
-    then
-        apt-get update
-        printf "%d" ${ts_new} > ${ts_file}
-    fi
-    apt-get install -y "$@"
-}
-
-ovpn() {
-    if [ -z $1 ]
-    then
-        cd ~/.ovpn
-    else
-        cd $1
-    fi
-    xterm -e "openvpn --daemon --script-security 2 --config *.ovpn;" &
-}
-
-upow() {
-    upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep perc | grep -oE [0-9]+. | sed -r s/100\%//
-}
-
-iter() {
-    while sleep 1
-    do
-        "$@"
-    done
 }
 
 s() {
@@ -197,7 +84,11 @@ psc_branch() {
     fi
 }
 
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;${PSC}\]\A\[\033[00m\]:\[\033[01;${PSC}\]$(upow)\[\033[00m\]:\[\033[01;${PSC}\]\u\[\033[00m\]:\[\033[01;${PSC}\]\w\[\033[00m\]$(psc_branch)\$ '
+_ps1_upow() {
+    upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep perc | grep -oE [0-9]+. | sed -r s/100\%//
+}
+
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;${PSC}\]\A\[\033[00m\]:\[\033[01;${PSC}\]$(_ps1_upow)\[\033[00m\]:\[\033[01;${PSC}\]\u\[\033[00m\]:\[\033[01;${PSC}\]\w\[\033[00m\]$(psc_branch)\$ '
 
 # enable programmable completion features
 if ! shopt -oq posix; then
@@ -207,9 +98,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-export LESS='-R'
-export LESSOPEN='|pygmentize %s'
 
 dump() {
     local t="$HOME/dump/$(date +%s)"
@@ -221,12 +109,8 @@ dump() {
     fi
 }
 
-copydump() {
-    local t="$HOME/dump/$(date +%s)"
-    mkdir -p "$t"
-    if [[ $# == 0 ]]; then
-        cd "$t"
-    else
-        cp -r "$@" "$t"
-    fi
-}
+if [ -d $HOME/.bashrc.d ] && [[ $(find $HOME/.bashrc.d -type f | wc -l) -gt 0 ]]; then
+for f in $(ls -1 $HOME/.bashrc.d/*); do
+  source $f
+done
+fi
