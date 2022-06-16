@@ -15,5 +15,11 @@
 # If you want to use XFCE config tools...
 #
 #xfce-mcs-manager &
-feh --bg-center ~/img/Wallpapers/default.jpg 
 
+feh --bg-fill ~/img/wallpapers/default.jpg
+# feh --bg-max ~/img/default.jpg
+
+pkill conky
+conky -c ~/.conkyrc &
+
+xhost +si:localuser:root
