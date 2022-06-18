@@ -1,0 +1,2 @@
+x ALL=(ALL) NOPASSWD: /usr/bin/nmap
+x ALL=(ALL) NOPASSWD: /usr/bin/ncrack

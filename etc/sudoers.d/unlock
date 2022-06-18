@@ -1,0 +1,13 @@
+x ALL=(ALL) NOPASSWD: /bin/mount
+x ALL=(ALL) NOPASSWD: /bin/umount
+x ALL=(ALL) NOPASSWD: /usr/sbin/pm-suspend
+x ALL=(ALL) NOPASSWD: /usr/bin/nmap
+x ALL=(ALL) NOPASSWD: /bri
+x ALL=(ALL) NOPASSWD: /usr/bin/python3 /unlock
+x ALL=(ALL) NOPASSWD: /unlock
+x ALL=(ALL) NOPASSWD: /show-n-system2
+
+test ALL=(ALL) NOPASSWD: /usr/sbin/pm-suspend
+test ALL=(ALL) NOPASSWD: /usr/bin/python3 /unlock
+test ALL=(ALL) NOPASSWD: /unlock
+test ALL=(ALL) NOPASSWD: /show-n-system2
