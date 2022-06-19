@@ -1,0 +1,24 @@
+#!/usr/bin/env python3.8
+"""
+Usage:
+  bri
+  bri (add|sub|set) <value>
+"""
+import sys
+import docopt
+
+
+FILE="/sys/class/backlight/intel_backlight/brightness"
+
+args = docopt.docopt(__doc__)
+value = int(args["<value>"] or 0)
+cur = int(open(FILE).read())
+
+if args["add"]:
+    open(FILE,'w').write(str(cur+value))
+elif args["sub"]:
+    open(FILE,'w').write(str(cur-value))
+elif args["set"]:
+    open(FILE,'w').write(value)
+else:
+    print(cur)

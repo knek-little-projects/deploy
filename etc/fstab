@@ -1,0 +1,1 @@
+LABEL=rand /home/x/rand ext4 rw,user,exec,nofail 1 1
